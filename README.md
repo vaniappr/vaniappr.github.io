@@ -3,6 +3,7 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 
 ### Education
 MSc Business Analytics | University of Warwick (_September 2025_)
+
 ST (B.Eng) Industrial Engineering | Universitas Brawijaya (_September 2019_)
 
 ### Work Experience
@@ -18,6 +19,7 @@ Junior Economist @ Central Bank of Indonesia
 ### Achievements
 First Place at WBS Gillmore Hackathon, Oct 2024	 
 -	Conducted research on gamification to enhance financial literacy for children.
+
 Favourite Winner of Design Competition for Industrial System and Environment, Nov 2018	 
 -	Conducted research on automatic tools to improve work efficiency in Small and Medium Enterprises (SMEs)
 
