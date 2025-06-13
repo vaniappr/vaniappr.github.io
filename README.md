@@ -3,8 +3,8 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 
 
 ### Education
-- MSc Business Analytics - University of Warwick (_September 2025_)
-- ST (B.Eng) Industrial Engineering - Universitas Brawijaya (_September 2019_)
+- MSc Business Analytics - University of Warwick (_Sep 2025_)
+- ST (B.Eng) Industrial Engineering - Universitas Brawijaya (_Sep 2019_)
 
 
 ### Work Experience
