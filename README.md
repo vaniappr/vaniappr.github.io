@@ -1,9 +1,11 @@
 # Business Analyst
 Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 
+
 ### Education
-- MSc Business Analytics | University of Warwick (_September 2025_)
-- ST (B.Eng) Industrial Engineering | Universitas Brawijaya (_September 2019_)
+- MSc Business Analytics - University of Warwick (_September 2025_)
+- ST (B.Eng) Industrial Engineering - Universitas Brawijaya (_September 2019_)
+
 
 ### Work Experience
 **Analyst @ Central Bank of Indonesia (_Jan 2024 - Sep 2024_)**
@@ -15,12 +17,14 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 - Provided policy recommendations for Bank Indonesia Head Office and/or Regional Governments.
 - Organized forums and events aimed at fostering economic development and collaborated among regional stakeholders. 
 
+
 ### Achievements
 **First Place at WBS Gillmore Hackathon, Oct 2024**	 
 -	Conducted research on gamification to enhance financial literacy for children.
 
 **Favourite Winner of Design Competition for Industrial System and Environment, Nov 2018**	 
 -	Conducted research on automatic tools to improve work efficiency in Small and Medium Enterprises (SMEs)
+
 
 ### Publications
 - Sumantri, Y., Gapsari, F., Hadiko, G. and Pramuditha, V.P., 2022. Improving logistics services of LSP to minimize logistics outsourcing risks in the ceramic industry. Journal of Distribution Science, 20(6), pp.87–97.
