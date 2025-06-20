@@ -8,17 +8,13 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 
 
 ### Work Experience
-**Analyst @ Central Bank of Indonesia (_Jan 2024 - Sep 2024_)**
-- Managed data and information, as well as conducted analyses to determine strategies related to developing Micro, Small, and Medium Enterprise (MSME) and inclusive finance.
-- Executed MSME development program to control inflation and enhance regional economy development through strategies such as exports, digitalisation, financing, etc.
-- Designed and maintained a dashboard visualizing Bank Indonesia’s regional interventions, including the number and progress of supported MSMEs, and predictive insights to support inflation stabilization efforts.
-
-**Junior Economist @ Central Bank of Indonesia (_Jan 2021 - Dec 2023_)**
-- Analysed regional economic data—including inflation, investment trends, payment systems, and economic growth in general to support policy decision-making.
-- Developed economic forecasting models using R, EViews, and Excel, improving the accuracy of regional inflation and economic growth predictions.
-- Prepared presentations including data visualisations for Bank Indonesia headquarters and local governments.
-- Contributed to North Sulawesi being ranked among the top 3 provinces in Indonesia for inflation control, with Minahasa Regency recognized as national runner-up.
-- Organized and facilitated stakeholder forums with regional policymakers and businesses, enhancing coordination in economic development efforts.
+**Analyst @ Central Bank of Indonesia (_Jan 2021 - Sep 2024_)**
+- Conducted macroeconomic analysis, forecasting, and data modelling using R, EViews, and Excel to support regional economic policy, payment systems performance, and inflation control.
+- Implemented Micro, Small, and Medium Enterprise (MSME) development initiatives, including payment digitalisation and export facilitation, by leveraging data analysis and stakeholder collaboration to support small businesses and advance Indonesia’s financial inclusion goals.
+- Drove community adoption of Quick Response Code Indonesian Standard (QRIS), Bank Indonesia’s mobile payment initiative targeting 40 million merchants nationwide, enabling small vendors to accept cashless payments and boosting digital literacy and business efficiency at the grassroots level.
+- Developed interactive dashboards and visualisations using Excel, Python, and Power BI to track regional economic indicators, digital payment performance, and MSME development programme outcomes.
+- Produced reports and presentations for Bank Indonesia headquarters, regional governments, and key stakeholders using PowerPoint, combining clarity with analytical depth.
+- Facilitated data-driven discussions and supported executive decision-making through concise, visual communication of complex economic issues.
 
 
 ### Achievements
