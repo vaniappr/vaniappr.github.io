@@ -16,15 +16,16 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 - Produced reports and presentations for Bank Indonesia headquarters, regional governments, and key stakeholders using PowerPoint, combining clarity with analytical depth.
 - Facilitated data-driven discussions and supported executive decision-making through concise, visual communication of complex economic issues.
 
+
 ### Projects
-- Financial Analytics - Portfolio Optimisation Under Constraints https://github.com/vaniappr/portfolio-optimisation
-- Analysing factors that contribute to customer satisfaction in retail https://github.com/vaniappr/statistics/tree/main/cust-satisfaction
-- Analysing factors that affect the prevalence of Cardiovascular Disease in England https://github.com/vaniappr/statistics/tree/main/cvd-in-england
-- A/B Testing on Human-AI interaction in loan decision making https://github.com/vaniappr/statistics/tree/main/loan-review-ab-testing
-- Location selection based on footfall data https://github.com/vaniappr/statistics/tree/main/location-selection
-- Customer review prediction in e-commerce using ML https://github.com/vaniappr/machine-learning/tree/main/ecommerce-satisfaction-prediction
-- Classification using feasible direction SVM https://github.com/vaniappr/machine-learning/tree/main/feasible-direction-svm
-- Hotel performance analysis using SQL https://github.com/vaniappr/sql/tree/main/hotel-performance
+- [Financial Analytics - Portfolio Optimisation Under Constraints](https://github.com/vaniappr/portfolio-optimisation)
+- [Analysing factors that contribute to customer satisfaction in retail](https://github.com/vaniappr/statistics/tree/main/cust-satisfaction)
+- [Analysing factors that affect the prevalence of Cardiovascular Disease in England](https://github.com/vaniappr/statistics/tree/main/cvd-in-england)
+- [A/B Testing on Human-AI interaction in loan decision making](https://github.com/vaniappr/statistics/tree/main/loan-review-ab-testing)
+- [Location selection based on footfall data](https://github.com/vaniappr/statistics/tree/main/location-selection)
+- [Customer review prediction in e-commerce using ML](https://github.com/vaniappr/machine-learning/tree/main/ecommerce-satisfaction-prediction)
+- [Classification using feasible direction SVM](https://github.com/vaniappr/machine-learning/tree/main/feasible-direction-svm)
+- [Hotel performance analysis using SQL](https://github.com/vaniappr/sql/tree/main/hotel-performance)
 
 
 ### Achievements
