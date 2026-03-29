@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vania Putri Pramuditha — Data & Payments Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #070b12;
+      --bg2: #0d1420;
+      --bg3: #111b2a;
+      --border: rgba(255,255,255,0.07);
+      --accent: #00e5b0;
+      --accent2: #0099ff;
+      --text: #e8edf5;
+      --muted: #7a8a9e;
+      --card: rgba(255,255,255,0.03);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRID LINES ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(7,11,18,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,229,176,0.08) 0%, transparent 70%);
+      top: 50%;
+      right: -100px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      padding: 6px 14px;
+      border: 1px solid rgba(0,229,176,0.25);
+      border-radius: 2px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    h1 .accent { color: var(--accent); }
+    h1 .dim { color: var(--muted); font-weight: 400; }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: var(--accent);
+      color: #070b12;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-num span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { padding: 120px 0; }
+
+    .exp-grid {
+      display: grid;
+      gap: 2px;
+    }
+
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 36px 40px;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .exp-card:hover { border-color: rgba(0,229,176,0.2); background: rgba(0,229,176,0.02); }
+    .exp-card:hover::before { opacity: 1; }
+
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .exp-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    .exp-org {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(0,229,176,0.06);
+      border: 1px solid rgba(0,229,176,0.15);
+      color: var(--accent);
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SKILLS ── */
+    #skills { padding: 80px 0 120px; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+    }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      font-size: 13px;
+      padding: 5px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 2px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { padding: 120px 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 32px 36px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: rgba(0,229,176,0.25);
+      background: rgba(0,229,176,0.02);
+      transform: translateY(-2px);
+    }
+
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(0,229,176,0.4);
+      margin-bottom: 16px;
+    }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+    }
+
+    .project-arrow {
+      position: absolute;
+      top: 32px; right: 36px;
+      font-size: 18px;
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover .project-arrow {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    /* ── PUBLICATIONS ── */
+    #publications { padding: 80px 0 120px; }
+
+    .pub-list { display: grid; gap: 2px; }
+
+    .pub-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px 36px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      white-space: nowrap;
+      padding-top: 3px;
+    }
+
+    .pub-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .pub-journal {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements { padding: 0 0 120px; }
+
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .ach-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .ach-icon {
+      font-size: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .ach-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .ach-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-heading .accent { color: var(--accent); }
+
+    .contact-sub {
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    .contact-links { display: grid; gap: 12px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: rgba(0,229,176,0.3);
+      background: rgba(0,229,176,0.03);
+    }
+
+    .contact-link-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: auto;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 24px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .container { padding: 0 24px; }
+      .hero-stats { gap: 32px; flex-wrap: wrap; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">VPP.DEV</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-tag">Available for roles from Sep 2027 · Open to remote contracts now</div>
+      <h1>
+        Vania<br>
+        <span class="accent">Pramuditha</span><br>
+        <span class="dim">Analytics.</span>
+      </h1>
+      <p class="hero-sub">
+        <strong>Data Innovation Specialist</strong> at the Central Bank of Indonesia.<br>
+        6+ years building payment systems analytics, LLM pipelines, and data infrastructure — now targeting commercial fintech.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Projects ↓</a>
+        <a href="mailto:vaniapramuditha@gmail.com" class="btn-ghost">Get in Touch →</a>
+        <a href="https://www.linkedin.com/in/vaniappr" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+        <a href="https://github.com/vaniappr" target="_blank" class="btn-ghost">GitHub ↗</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">80<span>M+</span></div>
+          <div class="stat-label">Records Processed</div>
+        </div>
+        <div>
+          <div class="stat-num">MSc</div>
+          <div class="stat-label">Business Analytics · Warwick</div>
+        </div>
+        <div>
+          <div class="stat-num">2<span>x</span></div>
+          <div class="stat-label">Award Winner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// Experience</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="exp-grid">
+
+        <div class="exp-card fade-up">
+          <div class="exp-top">
+            <div class="exp-title">Data Innovation Specialist</div>
+            <div class="exp-period">Oct 2025 — Present</div>
+          </div>
+          <div class="exp-org">Central Bank of Indonesia · Head Office, Jakarta</div>
+          <ul class="exp-bullets">
+            <li>Built end-to-end PySpark pipelines on 80M+ RTGS transaction records — entity resolution using Jaro-Winkler fuzzy matching and LLM classification via Azure ML endpoints</li>
+            <li>Architected INSPIRE: an LLM-powered media intelligence platform classifying IDR exchange rate narratives from live Digimind API feeds, informing central bank communication strategy</li>
+            <li>Designed prompt engineering frameworks distinguishing externally- vs domestically-driven currency movements; built Python-based fact-checking against market data</li>
+            <li>Embedded analyst across payment systems, macroprudential, monetary, and communication departments simultaneously</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">PySpark</span>
+            <span class="tag">Azure ML</span>
+            <span class="tag">LLM Integration</span>
+            <span class="tag">Hive / Impala</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Entity Resolution</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up">
+          <div class="exp-top">
+            <div class="exp-title">Junior Analyst</div>
+            <div class="exp-period">Jan 2021 — Sep 2024</div>
+          </div>
+          <div class="exp-org">Central Bank of Indonesia · North Sulawesi Regional Office</div>
+          <ul class="exp-bullets">
+            <li>Led QRIS (digital payment) adoption across North Sulawesi — Bank Indonesia's mobile payment initiative targeting 40M merchants nationwide</li>
+            <li>Built Power BI dashboards tracking macroeconomic indicators and digital payment KPIs for senior management; supported North Sulawesi achieving top-tier provincial inflation control in 2023</li>
+            <li>Macroeconomic forecasting and modelling using R and EViews; automated data processing via IBM Cognos SQL workflows</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">R</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">SQL</span>
+            <span class="tag">EViews</span>
+            <span class="tag">Payment Systems</span>
+            <span class="tag">Forecasting</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up">
+          <div class="exp-top">
+            <div class="exp-title">MSc Business Analytics</div>
+            <div class="exp-period">Sep 2024 — Sep 2025</div>
+          </div>
+          <div class="exp-org">University of Warwick · Warwick Business School</div>
+          <ul class="exp-bullets">
+            <li>Dissertation: Human-AI decision-making in financial inclusion — randomised controlled experiment using LendingClub data. Methods: factorial design, PCA-based Financial Inclusion Index, clustered standard error regression</li>
+            <li>Modules: Advanced Analytics, Statistics, Forecasting, Data Management, Optimisation</li>
+            <li>First Place, WBS Gillmore Hackathon (Oct 2024) — research on gamification for children's financial literacy</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">A/B Testing</span>
+            <span class="tag">Python</span>
+            <span class="tag">Experimental Design</span>
+            <span class="tag">PCA</span>
+            <span class="tag">Regression Analysis</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// Skills</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Data Engineering</div>
+          <div class="skill-list">
+            <span class="skill-pill">PySpark</span>
+            <span class="skill-pill">Hive</span>
+            <span class="skill-pill">Impala</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">IBM Cognos</span>
+            <span class="skill-pill">ETL Pipelines</span>
+            <span class="skill-pill">Entity Resolution</span>
+          </div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">AI / Machine Learning</div>
+          <div class="skill-list">
+            <span class="skill-pill">Azure ML</span>
+            <span class="skill-pill">Azure AI Foundry</span>
+            <span class="skill-pill">LLM Integration</span>
+            <span class="skill-pill">Prompt Engineering</span>
+            <span class="skill-pill">scikit-learn</span>
+            <span class="skill-pill">SVM</span>
+          </div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Analytics & Statistics</div>
+          <div class="skill-list">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">R</span>
+            <span class="skill-pill">A/B Testing</span>
+            <span class="skill-pill">Regression</span>
+            <span class="skill-pill">Forecasting</span>
+            <span class="skill-pill">PCA</span>
+            <span class="skill-pill">EViews</span>
+          </div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Visualisation & Reporting</div>
+          <div class="skill-list">
+            <span class="skill-pill">Power BI</span>
+            <span class="skill-pill">matplotlib</span>
+            <span class="skill-pill">Excel (Advanced)</span>
+            <span class="skill-pill">Data Storytelling</span>
+          </div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Domain Expertise</div>
+          <div class="skill-list">
+            <span class="skill-pill">Payment Systems</span>
+            <span class="skill-pill">RTGS Infrastructure</span>
+            <span class="skill-pill">Digital Payments</span>
+            <span class="skill-pill">Macroprudential</span>
+            <span class="skill-pill">FX Analytics</span>
+            <span class="skill-pill">Financial Regulation</span>
+          </div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Tools & Platforms</div>
+          <div class="skill-list">
+            <span class="skill-pill">Git / GitHub</span>
+            <span class="skill-pill">Digimind API</span>
+            <span class="skill-pill">Azure Cloud</span>
+            <span class="skill-pill">Pandas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// Projects</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-grid">
+
+        <a href="https://github.com/vaniappr/statistics/tree/main/loan-review-ab-testing" target="_blank" class="project-card fade-up">
+          <div class="project-num">01</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">Human-AI Decision-Making in Lending</div>
+          <div class="project-desc">Randomised controlled experiment on how AI accuracy levels and incentive design affect loan review decisions. Factorial design, PCA-based Financial Inclusion Index, clustered standard error regression. MSc dissertation, Warwick.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">A/B Testing</span>
+            <span class="stack-tag">PCA</span>
+            <span class="stack-tag">Regression</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/vaniappr/portfolio-optimisation" target="_blank" class="project-card fade-up">
+          <div class="project-num">02</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">Portfolio Optimisation Under Constraints</div>
+          <div class="project-desc">Quantitative portfolio construction with risk-return optimisation under real-world constraints. Efficient frontier analysis with Python.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Optimisation</span>
+            <span class="stack-tag">Financial Analytics</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/vaniappr/statistics/tree/main/cust-satisfaction" target="_blank" class="project-card fade-up">
+          <div class="project-num">03</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">Customer Satisfaction Drivers in Retail</div>
+          <div class="project-desc">Statistical analysis identifying the strongest predictors of retail customer satisfaction using regression modelling and feature importance analysis.</div>
+          <div class="project-stack">
+            <span class="stack-tag">R</span>
+            <span class="stack-tag">Regression</span>
+            <span class="stack-tag">Statistics</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/vaniappr/machine-learning/tree/main/ecommerce-satisfaction-prediction" target="_blank" class="project-card fade-up">
+          <div class="project-num">04</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">E-Commerce Review Prediction</div>
+          <div class="project-desc">ML classification model predicting customer review scores from purchase and product data. Covers feature engineering, model selection, and evaluation.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">scikit-learn</span>
+            <span class="stack-tag">Classification</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/vaniappr/sql/tree/main/hotel-performance" target="_blank" class="project-card fade-up">
+          <div class="project-num">05</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">Hotel Performance Analysis</div>
+          <div class="project-desc">End-to-end SQL analysis of hotel booking and revenue data — occupancy trends, cancellation patterns, and revenue per room optimisation.</div>
+          <div class="project-stack">
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">Data Analysis</span>
+            <span class="stack-tag">Business Analytics</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/vaniappr/statistics/tree/main/cvd-in-england" target="_blank" class="project-card fade-up">
+          <div class="project-num">06</div>
+          <div class="project-arrow">↗</div>
+          <div class="project-title">Cardiovascular Disease Prevalence in England</div>
+          <div class="project-desc">Statistical investigation of socioeconomic and demographic factors associated with cardiovascular disease rates across English regions.</div>
+          <div class="project-stack">
+            <span class="stack-tag">R</span>
+            <span class="stack-tag">Statistics</span>
+            <span class="stack-tag">Public Health</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// Publications</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="pub-list">
+        <div class="pub-card fade-up">
+          <div class="pub-year">2022</div>
+          <div>
+            <div class="pub-title">Improving logistics services of LSP to minimise logistics outsourcing risks in the ceramic industry</div>
+            <div class="pub-journal">Journal of Distribution Science, 20(6), pp.87–97 · Sumantri, Y., Gapsari, F., Hadiko, G. and Pramuditha, V.P.</div>
+          </div>
+        </div>
+        <div class="pub-card fade-up">
+          <div class="pub-year">2019</div>
+          <div>
+            <div class="pub-title">Evaluation and strategic planning of playground for kids to reduce the accident risk</div>
+            <div class="pub-journal">Indian Journal of Public Health Research and Development, 10(2), pp.467–472 · Sholihah, Q., Sari, S.I.K., Pramuditha, V.P., et al.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// Recognition</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="ach-grid">
+        <div class="ach-card fade-up">
+          <div class="ach-icon">🏆</div>
+          <div>
+            <div class="ach-title">First Place — WBS Gillmore Hackathon</div>
+            <div class="ach-desc">Warwick Business School, Oct 2024. Research on gamification to enhance financial literacy for children.</div>
+          </div>
+        </div>
+        <div class="ach-card fade-up">
+          <div class="ach-icon">🥇</div>
+          <div>
+            <div class="ach-title">Favourite Winner — DESCOMFIRST</div>
+            <div class="ach-desc">Design Competition for Industrial System and Environment, Nov 2018. Research on automation tools to improve SME work efficiency.</div>
+          </div>
+        </div>
+        <div class="ach-card fade-up">
+          <div class="ach-icon">📊</div>
+          <div>
+            <div class="ach-title">Top Inflation Control Province — 2023</div>
+            <div class="ach-desc">North Sulawesi recognised as one of Indonesia's top-performing provinces for inflation control. Contributed through data modelling and policy analytics.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div>
+          <h2 class="contact-heading">Let's<br>work<br><span class="accent">together.</span></h2>
+          <p class="contact-sub">Open to remote contracts and freelance projects now. Available for full relocation (UK, Australia, Netherlands) from September 2027.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:vaniapramuditha@gmail.com" class="contact-link">
+            <span>✉</span>
+            <span>vaniapramuditha@gmail.com</span>
+            <span class="contact-link-label">EMAIL</span>
+          </a>
+          <a href="https://www.linkedin.com/in/vaniappr" target="_blank" class="contact-link">
+            <span>in</span>
+            <span>linkedin.com/in/vaniappr</span>
+            <span class="contact-link-label">LINKEDIN</span>
+          </a>
+          <a href="https://github.com/vaniappr" target="_blank" class="contact-link">
+            <span>⌥</span>
+            <span>github.com/vaniappr</span>
+            <span class="contact-link-label">GITHUB</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 VANIA PUTRI PRAMUDITHA</p>
+    <p>JAKARTA · INDONESIA</p>
+  </footer>
+
+  <script>
+    // Scroll-triggered fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
