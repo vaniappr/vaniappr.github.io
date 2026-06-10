@@ -18,6 +18,7 @@ Technical Skills: Python, SQL, R, Power BI, Microsoft Excel
 
 
 ### Projects
+- [Fintech Transaction Analysis - Fraud Analysis](https://github.com/vaniappr/financial_analysis)
 - [Financial Analytics - Portfolio Optimisation Under Constraints](https://github.com/vaniappr/portfolio-optimisation)
 - [Analysing factors that contribute to customer satisfaction in retail](https://github.com/vaniappr/statistics/tree/main/cust-satisfaction)
 - [Analysing factors that affect the prevalence of Cardiovascular Disease in England](https://github.com/vaniappr/statistics/tree/main/cvd-in-england)
